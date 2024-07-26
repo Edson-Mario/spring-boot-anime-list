@@ -56,7 +56,7 @@ public class AnimeService {
     @Transactional
     public Anime replaceName(AnimePatchNameRequestBody animePutNameRequestBody){
         Anime animeSaved = findByIdOrThrowBadRequestException(animePutNameRequestBody.getId());
-        animeSaved.setName(animeSaved.getName());
+        animeSaved.setName(animePutNameRequestBody.getName());
         return animeRepository.save(animeSaved);
     }
 
