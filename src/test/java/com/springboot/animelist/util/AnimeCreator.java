@@ -14,8 +14,17 @@ public class AnimeCreator {
         return Anime.builder()
                 .id(1L)
                 .name("Naruto")
+                .episode(Short.valueOf("16"))
+                .build();
+    }
+
+    public static  Anime createValidAnime(){
+        return Anime.builder()
+                .id(1L)
+                .name("Boruto")
                 .episode(Short.valueOf("14"))
                 .build();
+
     }
 
     public static Anime createAnimeWithEmptyName(){

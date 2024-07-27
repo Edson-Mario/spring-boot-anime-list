@@ -12,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @DisplayName("test for anime repository")
@@ -62,7 +61,7 @@ class AnimeRepositoryTest {
 
         Assertions.assertThat(animeUpdated.getEpisode())
                 .isNotNull()
-                .isEqualTo(AnimeCreator.createAnimeToBeSave().getEpisode());
+                .isNotEqualTo(AnimeCreator.createAnimeToBeSave().getEpisode());
     }
 
     @Test
@@ -115,11 +114,8 @@ class AnimeRepositoryTest {
 
     @Test
     @DisplayName("findById returns empty list when anime is not found")
-    void findById_ReturnsEmptyList_WhenAnimeIsNotFound(){
-        Anime anime = AnimeCreator.createAnimeToBeSave();
-        this.animeRepository.save(anime);
-
-        List<Anime> animes = this.animeRepository.findByName("One Peace");
+    void findByName_ReturnsEmptyList_WhenAnimeIsNotFound(){
+        List<Anime> animes = this.animeRepository.findByName("One peace");
 
         Assertions.assertThat(animes)
                 .isEmpty();
