@@ -101,7 +101,7 @@ class AnimeServiceTest {
 
     @Test
     @DisplayName("findByIdOrThrowBadRequestException return anime when successful")
-    void findByIdOrThrowBadRequestException_ReturnsListOfAnime_WhenSuccessful(){
+    void findByIdOrThrowBadRequestException_ReturnsAnime_WhenSuccessful(){
         var expectedId = AnimeCreator.createValidAnime().getId();
 
         Anime animes = animeService.findByIdOrThrowBadRequestException(1L);
