@@ -101,7 +101,7 @@ class AnimeRepositoryTest {
 
         Assertions.assertThat(animes.get(0).getId())
                 .isNotNull()
-                .isEqualTo(1L);
+                .isEqualTo(animeSaved.getId());
 
         Assertions.assertThat(animes.get(0).getName())
                 .isNotEmpty()
@@ -134,4 +134,5 @@ class AnimeRepositoryTest {
         Assertions.assertThat(animeOptional)
                 .isEmpty();
     }
+
 }
