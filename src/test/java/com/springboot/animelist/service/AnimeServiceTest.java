@@ -2,6 +2,7 @@ package com.springboot.animelist.service;
 
 import com.springboot.animelist.controller.AnimeController;
 import com.springboot.animelist.domain.Anime;
+import com.springboot.animelist.exception.BadRequestException;
 import com.springboot.animelist.repository.AnimeRepository;
 import com.springboot.animelist.requests.AnimePatchEpisodeRequestBody;
 import com.springboot.animelist.requests.AnimePatchNameRequestBody;
@@ -99,8 +100,8 @@ class AnimeServiceTest {
     }
 
     @Test
-    @DisplayName("findById return anime when successful")
-    void findById_ReturnsListOfAnime_WhenSuccessful(){
+    @DisplayName("findByIdOrThrowBadRequestException return anime when successful")
+    void findByIdOrThrowBadRequestException_ReturnsListOfAnime_WhenSuccessful(){
         var expectedId = AnimeCreator.createValidAnime().getId();
 
         Anime animes = animeService.findByIdOrThrowBadRequestException(1L);
@@ -111,6 +112,18 @@ class AnimeServiceTest {
                 .isNotNull()
                 .isEqualTo(expectedId);
     }
+
+    @Test
+    @DisplayName("findByIdOrThrowBadRequestException throws BadRequestException when Anime is not found")
+    void findByIdOrThrowBadRequestException_ThrowsBadRequestException_WhenSuccessful(){
+        BDDMockito.when(animeRepositoryMock.findById(ArgumentMatchers.anyLong()))
+                .thenReturn(Optional.empty());
+
+        Assertions.assertThatExceptionOfType(BadRequestException.class)
+                        .isThrownBy(() -> animeService.findByIdOrThrowBadRequestException(1L))
+                .withMessageContaining("Anime not found");
+    }
+
 
     @Test
     @DisplayName("findByName return list of anime when successful")

@@ -1,6 +1,7 @@
 package com.springboot.animelist.service;
 
 import com.springboot.animelist.domain.Anime;
+import com.springboot.animelist.exception.BadRequestException;
 import com.springboot.animelist.mapper.AnimeMapper;
 import com.springboot.animelist.repository.AnimeRepository;
 import com.springboot.animelist.requests.AnimePostRequestBody;
@@ -32,7 +33,7 @@ public class AnimeService {
 
     public Anime findByIdOrThrowBadRequestException(long id){
         return animeRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Anime not found"));
+                .orElseThrow(() -> new BadRequestException("Anime not found"));
     }
 
     public List<Anime> findByName(String name){
