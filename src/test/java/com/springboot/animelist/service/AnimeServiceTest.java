@@ -120,7 +120,7 @@ class AnimeServiceTest {
                 .thenReturn(Optional.empty());
 
         Assertions.assertThatExceptionOfType(BadRequestException.class)
-                        .isThrownBy(() -> animeService.findByIdOrThrowBadRequestException(1L))
+                .isThrownBy(() -> animeService.findByIdOrThrowBadRequestException(1L))
                 .withMessageContaining("Anime not found");
     }
 
